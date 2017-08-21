@@ -34,9 +34,9 @@ public class GPSManager : MonoBehaviour {
         }
 
         Input.location.Start();
+
         int maxWait = 20;
-        bool wait = (Input.location.status == LocationServiceStatus.Initializing && maxWait > 20);
-        while (wait) {
+        while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0) {
             yield return new WaitForSeconds(1f);
             maxWait--;
         }
@@ -54,6 +54,7 @@ public class GPSManager : MonoBehaviour {
         Latitude = Input.location.lastData.latitude;
         Longitude = Input.location.lastData.longitude;
 
+        yield break;
     }
 
     #endregion
